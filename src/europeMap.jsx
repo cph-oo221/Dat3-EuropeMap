@@ -18,9 +18,7 @@ function EuropeMap() {
 
     e.target.style.fill = "red";
 
-    if (id.includes("-")) {
-      id = id.split("-")[0];
-    }
+    if (id.includes("-")) id = id.split("-")[0];
 
     console.log(id);
     fetchCountries(id);
@@ -35,13 +33,33 @@ function EuropeMap() {
       },
     })
       .then((response) => response.json())
-      .then((data) => setContry(data))
+      .then((data) => setContry(data[0]))
       .catch((error) => console.error("Error fetching joke:", error));
   };
+
+  function displayContry() {
+    if (contry) {
+      const borders = contry.borders?.map((border) => {
+        border = border + ", ";
+        return border;
+      });
+
+      return (
+        <div id="displayContry">
+          <p>Contry: {contry.name?.common}</p>
+          <p>Population: {contry.population}</p>
+          <p>Area: {contry.area}</p>
+          <p>Borders: {borders}</p>
+        </div>
+      );
+    }
+  }
 
   return (
     <div onClick={hanleClick}>
       <SvgComponent />
+
+      {displayContry()}
     </div>
   );
 }
