@@ -6,7 +6,6 @@ function EuropeMap() {
   const [prevTarget, setPrevTarget] = useState(null);
 
   useEffect(() => {
-    clearInterval();
     console.log(contry);
   }, [contry]);
 
